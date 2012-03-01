@@ -19,9 +19,12 @@ class SUBUNOAPI {
 */
 	private $_apikey = NULL;
 	private $_server_uri = NULL;
-	
-	public function run($apikey, $data, $server_uri = SUBUNO_SERVER_URI) {
+
+	public function SUBUNOAPI($apikey, $server_uri = SUBUNO_SERVER_URI) {
 		$this->_set_authentication_info($apikey, $server_uri);
+	}
+	
+	public function run($data) {
 		return $this->_call_server($data);
 	}
 	
@@ -78,82 +81,5 @@ class SUBUNOAPI {
 }
 
 class SUBUNOAPIError extends Exception { }
-
-/* 
-			
-	def post_transaction(self, **args):
-		if self._username and self._apikey:
-			data = {}
-		
-			data["u"] = self._username
-			data["apikey"] = self._apikey
-		
-			for i in args:
-				data[i] = args[i]
-		
-			data_json = json.dumps(data)
-		
-			headers = {}
-			headers["Content-Type"] = "application/json"
-			
-			print self._server_uri
-		
-			request = urllib2.Request(url = self._server_uri, data = data_json, headers = headers)
-			
-			result = urllib2.urlopen(request).read()
-			
-			try:
-				return json.loads(result)
-			except ValueError:
-				return result
-			return
-				
-		else:
-			raise SUBUNOAPIError("Username and API key not set. Call set_authentication_info.")
-			return
-		
-	def get_results(self, **args):
-		if self._username and self._apikey:
-			data = {}
-		
-			data["u"] = self._username
-			data["apikey"] = self._apikey
-		
-			for i in args:
-				data[i] = args[i]
-		
-			headers = {}
-			headers["Accept"] = "application/json"
-		
-			inParams = []
-
-			for i in data:
-				inParams.append("%s=%s" % (i, data[i]))			
-
-			url = self._server_uri + "?" + "&".join(inParams)
-
-			request = urllib2.Request(url = url, headers = headers)
-			
-			result = urllib2.urlopen(request).read()
-			
-			try:
-				return json.loads(result)
-			except ValueError:
-				return result
-			return
-
-		else:
-			raise SUBUNOAPIError("Username and API key not set. Call set_authentication_info.")
-			return
-		
-
-		
-class SUBUNOAPIError(Exception):
-    def __init__(self, type, message):
-        Exception.__init__(self, message)
-        self.type = type
-
-*/
-
 
 ?>
