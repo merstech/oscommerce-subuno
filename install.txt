@@ -1,0 +1,18 @@
+- modify catalog/includes/modules/subuno/subuno.php to hold your api key
+
+- create subuno table in oscommerce db
+create table orders_subuno(
+    order_id varchar(6) NOT NULL,
+    subuno_id varchar(10),
+    result varchar(20) NOT NULL,
+    error_cause varchar(255)
+);
+
+- add subuno request part on checkout (catalog/checkout_process.php):
+right after   $insert_id = tep_db_insert_id();
+add: require(DIR_WS_MODULES . 'subuno/process_order.php');
+
+
+- in catalog/admin/orders.php:
+On line 181 (right after the closing } for credit cards) add this require:
+
