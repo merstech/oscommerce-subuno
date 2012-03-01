@@ -20,7 +20,7 @@ class SUBUNOAPI {
 	private $_apikey = NULL;
 	private $_server_uri = NULL;
 
-	public function SUBUNOAPI($apikey, $server_uri = SUBUNO_SERVER_URI) {
+	public function __construct($apikey, $server_uri = SUBUNO_SERVER_URI) {
 		$this->_set_authentication_info($apikey, $server_uri);
 	}
 	
