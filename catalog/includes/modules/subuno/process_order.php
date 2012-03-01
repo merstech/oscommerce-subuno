@@ -13,6 +13,15 @@
 
 require(DIR_WS_MODULES . "subuno/subuno.php");
 
+# first, we insert a new record in subuno orders
+$subuno_order_values = array(
+	'order_id' => $insert_id,
+	'result' => 'REQUESTING'
+);
+
+# now we save the values in the subuno orders table
+tep_db_perform(TABLE_ORDERS_SUBUNO, $subuno_order_values);
+
 # let's make a request about information for this order
 $subuno_order_info = array(
 	't_id' => $insert_id,
@@ -34,13 +43,24 @@ $subuno_order_info = array(
 	# @TODO no shipping zip?
 );
 
+$subuno_order_values = NULL;
 try {
 	# let's try to do the request
 	$subuno_response = $subuno->run($subuno_order_info);
 	# it ran successfully
 	# let's save the results on the DB
+	$subuno_order_values = array(
+		'subuno_id' => $subuno_response['ref_code'],
+		'result' => $subuno_response['action']
+	);
 } catch (Exception $e) {
 	# it failed miserably, let's save the results on the DB
-	
+	$subuno_order_values = array(
+		'result' => 'ERROR',
+		'error_cause' => $e->getMessage()
+	);
 }
+
+# we do the update of the order
+tep_db_perform(TABLE_ORDERS_SUBUNO, $subuno_order_values, 'update', "order_id=$insert_id");
 ?>
