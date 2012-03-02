@@ -18,7 +18,10 @@ right after   $insert_id = tep_db_insert_id();
 add: require(DIR_WS_MODULES . 'subuno/process_order.php');
 
 - in catalog/admin/orders.php:
-On line 181 (right after the closing } for credit cards) add this require:
+Around line 237 (right after the closing } for credit cards) add this require:
+<?php
+require (DIR_WS_MODULES . "subuno/admin_order_details.php")
+?>
 On line 330, add subuno status field heading for orders list (around line 330):
 Originally, it looks like this:
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
@@ -50,3 +53,5 @@ Leave it like this:
 
 - Modify catalog/admin/include/languages/english.php and add this at the end:
 define('TABLE_HEADING_SUBUNO_STATUS', 'SUBUNO Status');
+define('SUBUNO_REF_ID', 'SUBUNO Ref ID');
+define('SUBUNO_STATUS', 'SUBUNO Status');
