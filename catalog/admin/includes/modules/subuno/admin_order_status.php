@@ -49,7 +49,9 @@ if (tep_db_num_rows($subuno_query) > 0) {
 
 	# how about the link?
 	if (! is_null($subuno_values['subuno_id']) and strlen($subuno_values['subuno_id']) > 0) {
-		echo ' <a target="_blank" href="https://app.subuno.com/transaction/' . $subuno_values['subuno_id'] . '">' . $subuno_message . '</a>';
+?>
+<a target="_blank" href="https://app.subuno.com/transaction/<?php echo $subuno_values['subuno_id'] ?>"><?php echo $subuno_message ?></a>
+<?php
 	} else {
 		echo $subuno_message;
 	}
