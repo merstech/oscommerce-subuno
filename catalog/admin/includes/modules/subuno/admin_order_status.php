@@ -47,12 +47,11 @@ if (tep_db_num_rows($subuno_query) > 0) {
 		break;
 	}
 
-	# let's show message for user
-	echo $subuno_message;
-
 	# how about the link?
 	if (! is_null($subuno_values['subuno_id']) and strlen($subuno_values['subuno_id']) > 0) {
-		echo ' <a target="_blank" href="https://app.subuno.com/transaction/' . $subuno_values['subuno_id'] . '">Details</a>';
+		echo ' <a target="_blank" href="https://app.subuno.com/transaction/' . $subuno_values['subuno_id'] . '">' . $subuno_message . '</a>';
+	} else {
+		echo $subuno_message;
 	}
 }
 ?>
