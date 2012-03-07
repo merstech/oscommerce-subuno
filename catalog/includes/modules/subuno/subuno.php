@@ -12,4 +12,6 @@ define('SUBUNO_API_KEY', "XXXXXXXXXXX");
 
 require(DIR_WS_MODULES . "subuno/subuno-api.php");
 
+$subuno = new SUBUNOAPI(SUBUNO_API_KEY);
+
 ?>
